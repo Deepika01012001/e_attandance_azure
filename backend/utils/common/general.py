@@ -153,13 +153,3 @@ def convert_to_sgt(time_str):
     return dt_sgt.strftime("%H:%M")
 
 
-def send_sms(message):
-    account_sid = "ACbb0d107a7aab292750f736d32c1ed5c4"
-    auth_token = "9aec936d253960751ffba24b4430c3e3"
-    client = Client(account_sid, auth_token)
-
-    message = client.messages.create(
-        body=message, from_="batch_job", to="+919965980181"
-    )
-
-    print(f"SMS sent: {message.sid}")
