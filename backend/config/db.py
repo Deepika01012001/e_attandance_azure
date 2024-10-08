@@ -2,7 +2,7 @@ import logging
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-from utils.config.secrets import get_driver_version, get_secrets
+from utils.config.secrets import get_driver_version
 
 db = SQLAlchemy()
 log = logging.getLogger("psb_academy_logger")
@@ -10,7 +10,6 @@ log = logging.getLogger("psb_academy_logger")
 def initialize_db(app):
 
     # Assume gets driver version properly
-    get_driver_version()
     driver_info = get_driver_version()
     # Fetch environment variables correctly
     psb_connection_string = os.environ.get("DB_URL_PSB")

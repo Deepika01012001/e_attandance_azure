@@ -6,7 +6,9 @@ import jwt
 import requests
 from functools import wraps
 
-from utils.config.secrets import get_secrets
+from config.db import initialize_db
+
+
 
 log = logging.getLogger("psb_academy_logger")
 
@@ -75,7 +77,7 @@ def verify_jwt(f):
             return jsonify({"message": "Token is missing"}), 401
 
         try:
-            secret_value = get_secrets()
+            secret_value = initialize_db()
             jwt_secret = secret_value.get("JWT_SECRET")
             if not jwt_secret:
                 return jsonify({"message": "JWT_SECRET is not set"}), 500
@@ -109,7 +111,7 @@ def decode_and_validate_specific_token():
         if not token:
             return {"error": "No token provided"}, 400
 
-        secret_value = get_secrets()
+        secret_value = initialize_db()
         jwt_secret = secret_value.get("JWT_SECRET")
 
         if not jwt_secret:

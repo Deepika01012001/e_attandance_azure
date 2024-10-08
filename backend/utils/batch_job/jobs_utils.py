@@ -12,7 +12,7 @@ from models.rdb.splus_activities import SPlusActivities
 from models.smart_gantry.gantry_view import PsbGantryView
 from models.smart_gantry.smart_gantry_student import SmartGantryStudents
 from models.sms.sms_f7_view import SMS_F7_View
-from config.db import db
+from config.db import db, initialize_db
 from utils.batch_job.jobs_failure_retries import job_retries
 from utils.blackboard.auth import bb_auth
 from utils.common.attendance_tracker import student_attendance_status
@@ -29,7 +29,6 @@ from utils.common.general import (
     remove_hyphens_context_identifier,
     time_str_to_time,
 )
-from utils.config.secrets import get_secrets
 
 log = logging.getLogger("psb_academy_logger")
 
@@ -346,7 +345,7 @@ def fetch_attendee_report(start_time, end_time):
 
         log.info(f"{start_time} is start and {end_time} is end")
         headers = {"Authorization": f"Bearer {access_token}"}
-        secret_value = get_secrets()
+        secret_value = initialize_db()
         REPORTS_URL = f"{secret_value['BLACKBOARD_REPORTS_URL']}"
         UUID = f"{secret_value['BLACKBOARD_UUID']}"
 

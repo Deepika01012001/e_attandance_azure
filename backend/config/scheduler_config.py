@@ -3,7 +3,7 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
 from utils.batch_job.jobs_main import load_batchjob_data
-from utils.config.secrets import get_driver_version, get_secrets
+from utils.config.secrets import get_driver_version
 
 
 def configure_scheduler(app):

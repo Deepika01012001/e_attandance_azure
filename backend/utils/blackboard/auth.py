@@ -1,10 +1,11 @@
 import requests
-from utils.config.secrets import get_secrets
+
+from config.db import initialize_db
 
 
 def bb_auth():
     try:
-        secret_value = get_secrets()
+        secret_value = initialize_db()
 
         token_payload = {
             "grant_type": "password",
