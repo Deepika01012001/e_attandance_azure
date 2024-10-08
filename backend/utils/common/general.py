@@ -151,5 +151,3 @@ def convert_to_sgt(time_str):
     dt_utc = utc.localize(dt)
     dt_sgt = dt_utc.astimezone(sgt)
     return dt_sgt.strftime("%H:%M")
-
-

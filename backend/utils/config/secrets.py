@@ -5,6 +5,7 @@ import boto3
 import pyodbc
 from botocore.exceptions import ClientError
 
+
 def get_driver_version():
     drivers = [
         driver
