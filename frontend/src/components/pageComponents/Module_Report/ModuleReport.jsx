@@ -567,7 +567,7 @@ const ModuleReport = () => {
   return (
     <div>
       <div className="text-center text-3xl font-bold">
-        Module Attendance Report hello world
+        Module Attendance Report NEW FOLDER
       </div>
       <div className="flex gap-4 justify-end">
         {currentData.length > 0 && !tableLoader ? (
