@@ -11,13 +11,13 @@ from models.psb.attendance import Attendance
 from models.rdb.splus_activities import SPlusActivities
 from models.smart_gantry.smart_gantry_student import SmartGantryStudents
 from utils.common.attendance_tracker import student_attendance_status
-from utils.common.general import (
-    construct_module_time,
-    convert_to_sql_server_datetime,
-    duration_to_minutes,
-    remove_hyphens_context_identifier,
-    send_sms,
-)
+# from utils.common.general import (
+#     construct_module_time,
+#     convert_to_sql_server_datetime,
+#     duration_to_minutes,
+#     remove_hyphens_context_identifier,
+#     send_sms,
+# )
 
 log = logging.getLogger("psb_academy_logger")
 
@@ -160,8 +160,8 @@ def attendance_entry(
                 "An error occurred during attendance entry."
             )
 
-    message = f"Attendance Entry Job: {status}. Succeeded: {len(succeeded_reports)}, Failed: {len(failed_reports)}"
-    send_sms(message)
+    # message = f"Attendance Entry Job: {status}. Succeeded: {len(succeeded_reports)}, Failed: {len(failed_reports)}"
+    # send_sms(message)
     return {
         "status": status,
         "succeeded": len(succeeded_reports),
