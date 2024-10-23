@@ -14,7 +14,7 @@ from routes.visitor_route import visitor_routes
 from routes.employee_route import employee_routes
 from routes.auth_route import jwt_routes
 
-from controllers.batch_job_controller import get_all_batch_jobs
+# from controllers.batch_job_controller import get_all_batch_jobs
 
 
 def initialize_routes(app):

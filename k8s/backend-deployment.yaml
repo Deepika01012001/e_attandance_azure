@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eattendance-deploy
+  namespace: "default"
+  labels:
+    app: "eattendance-deploy"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eattendance-deploy
+  template:
+    metadata:
+      labels:
+        app: eattendance-deploy
+    spec:
+      containers:
+      - name: "e-attendance-docker"
+        image: "gcr.io/plasma-origin-438611-i0/e-attendance-docker:latest"
+        # "gcr.io/plasma-origin-438611-i0/eattendance_docker_image@sha256:4375a2d531d9989c3dfe9fa1dbe1194cf6307fb4224dfc8f8314caa7c966c544"  # Updated image name
+        ports:
+        - containerPort: 8000  # Update as per your application
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "eattendance-deploy-hpa-jbza"
+  namespace: "default"
+  labels:
+    app: "eattendance-deploy"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "eattendance-deploy"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80
+      #   env:
+      #   - name: FLASK_ENV
+      #     value: "production"  # This sets the environment to production
+      #   - name: DEBUG
+      #     value: "false"       # Explicitly turn off debug mode
+      #   resources:
+      #     requests:
+      #       memory: "512Mi"     # Set memory request
+      #       cpu: "500m"         # Set CPU request
+      #     limits:
+      #       memory: "1Gi"       # Set memory limit
+      #       cpu: "1"            # Set CPU limit
+      # imagePullSecrets:
+      #   - name: jenkins-gcp
+---
+apiVersion: v1  
+kind: Service
+metadata:
+  name: eattendance-service  # Changed name to match the app
+  namespace: "default"
+  labels:
+    app: "eattendance-deploy"
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: "TCP"
+      port: 80          # The port that will be exposed externally
+      targetPort: 8000  # Update this to match the container port
+  selector:
+    app: eattendance-deploy  # Updated selector to match the Deployment

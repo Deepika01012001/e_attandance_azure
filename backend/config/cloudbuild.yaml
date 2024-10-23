@@ -1,8 +1,0 @@
-steps:
-  # Step 1: Build the Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/plasma-origin-438611-i0/eattendance_docker_image', '.']
-
-  # Step 2: Push the Docker image to GCR
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/plasma-origin-438611-i0/eattendance_docker_image']
