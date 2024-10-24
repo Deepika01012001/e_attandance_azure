@@ -15,7 +15,8 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Copy requirements.txt
-COPY requirements.txt ./ 
+# COPY requirements.txt ./ 
+COPY backend/requirements.txt ./
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
